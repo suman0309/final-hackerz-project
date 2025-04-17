@@ -9,6 +9,7 @@ A multimodal learning platform that leverages Groq's high-performance AI capabil
 - **Visual Learning**: Capture images for analysis and learning
 - **Real-time Responses**: Fast and accurate AI-powered responses
 - **Modern UI**: Clean and intuitive user interface
+- **Interactive Dragon**: Cute dragon character that throws fire when buttons are clicked
 
 ## Prerequisites
 
@@ -20,8 +21,8 @@ A multimodal learning platform that leverages Groq's high-performance AI capabil
 
 1. Clone the repository:
    ```bash
-   git clone <repository-url>
-   cd smart-learning-assistant
+   git clone https://github.com/suman0309/hackerznewwww.git
+   cd hackerznewwww
    ```
 
 2. Install dependencies:
@@ -50,6 +51,7 @@ A multimodal learning platform that leverages Groq's high-performance AI capabil
 1. **Text Input**: Type your question in the text area and click "Get Answer"
 2. **Voice Input**: Click "Start Listening" and speak your question
 3. **Visual Learning**: Use your camera to capture images for analysis
+4. **Interactive Dragon**: Click any button to see the dragon throw fire!
 
 ## Technologies Used
 

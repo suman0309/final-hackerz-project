@@ -5,10 +5,9 @@
 :root {
   --foreground-rgb: 255, 255, 255;
   --background-start-rgb: 0, 0, 0;
-  --background-end-rgb: 20, 0, 30;
-  --accent-primary: 180, 0, 255;
-  --accent-secondary: 255, 0, 60;
-  --accent-tertiary: 255, 182, 193;
+  --background-end-rgb: 0, 0, 0;
+  --accent-color: 147, 51, 234;
+  --accent-color-light: 192, 132, 252;
 }
 
 body {
@@ -20,110 +19,30 @@ body {
   );
   min-height: 100vh;
   position: relative;
-  perspective: 1000px;
+  overflow-x: hidden;
 }
 
 body::before {
   content: '';
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
-  right: 0;
-  bottom: 0;
+  width: 100%;
+  height: 100%;
   background: 
-    radial-gradient(circle at 20% 30%, rgba(180, 0, 255, 0.15) 0%, transparent 50%),
-    radial-gradient(circle at 80% 70%, rgba(255, 0, 60, 0.15) 0%, transparent 50%);
+    radial-gradient(circle at 20% 20%, rgba(147, 51, 234, 0.15) 0%, transparent 50%),
+    radial-gradient(circle at 80% 80%, rgba(192, 132, 252, 0.15) 0%, transparent 50%);
   pointer-events: none;
-  z-index: 0;
-  animation: gradient-shift 15s ease-in-out infinite alternate;
+  z-index: -1;
 }
 
 @layer components {
   .btn-primary {
-    @apply px-4 py-2 bg-gradient-to-r from-violet-600 to-red-600 text-white rounded-lg 
-           hover:from-violet-700 hover:to-red-700 transition-all duration-300 
-           transform hover:scale-105 hover:translate-y-[-2px] hover:rotate-1
-           shadow-lg shadow-violet-500/20 hover:shadow-violet-500/40
-           relative overflow-hidden;
-  }
-  
-  .btn-primary::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: -100%;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(
-      90deg,
-      transparent,
-      rgba(255, 255, 255, 0.2),
-      transparent
-    );
-    transition: 0.5s;
-  }
-  
-  .btn-primary:hover::before {
-    left: 100%;
-  }
-  
-  .card {
-    @apply bg-gray-900/80 backdrop-blur-sm rounded-xl shadow-lg p-6 
-           border border-violet-500/20 hover:border-violet-500/40 
-           transition-all duration-500 transform hover:scale-[1.02] 
-           hover:shadow-violet-500/10 hover:rotate-1
-           relative overflow-hidden;
-  }
-  
-  .card::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background: radial-gradient(
-      circle at var(--mouse-x, 50%) var(--mouse-y, 50%),
-      rgba(180, 0, 255, 0.1) 0%,
-      transparent 50%
-    );
-    opacity: 0;
-    transition: opacity 0.3s;
-  }
-  
-  .card:hover::before {
-    opacity: 1;
+    @apply px-4 py-2 bg-purple-600 text-white rounded-lg hover:bg-purple-700 transition-colors duration-200;
   }
   
   .input-field {
-    @apply w-full px-4 py-2 bg-gray-800/80 border border-violet-500/30 
-           rounded-lg focus:outline-none focus:ring-2 focus:ring-violet-500 
-           text-white placeholder-gray-400 transition-all duration-300
-           transform hover:scale-[1.01] focus:scale-[1.02]
-           hover:border-violet-500/50;
-  }
-  
-  .glass-effect {
-    @apply bg-gray-900/60 backdrop-blur-md border border-violet-500/20 
-           shadow-lg shadow-violet-500/10 transition-all duration-300
-           hover:shadow-violet-500/20 hover:border-violet-500/30;
-  }
-  
-  .text-glow {
-    @apply text-transparent bg-clip-text bg-gradient-to-r from-violet-400 to-red-400
-           animate-text-shine;
-  }
-  
-  .border-glow {
-    @apply border border-violet-500/30 shadow-lg shadow-violet-500/10
-           transition-all duration-300 hover:shadow-violet-500/20
-           hover:border-violet-500/50;
-  }
-  
-  .hover-3d {
-    @apply transition-all duration-300 transform hover:scale-105 
-           hover:translate-y-[-5px] hover:rotate-1
-           hover:shadow-xl hover:shadow-violet-500/20;
+    @apply w-full p-3 bg-gray-800/50 border border-gray-700 rounded-lg focus:outline-none focus:ring-2 focus:ring-purple-500;
   }
 }
 
@@ -192,54 +111,45 @@ body::before {
   animation: text-shine 3s linear infinite;
 }
 
-/* 3D Card Effect */
-.card-3d {
-  transform-style: preserve-3d;
-  transition: transform 0.3s ease;
-  --rotate-x: 0deg;
-  --rotate-y: 0deg;
-  --mouse-x: 50%;
-  --mouse-y: 50%;
-  transform: rotateX(var(--rotate-x)) rotateY(var(--rotate-y));
-  background: radial-gradient(
-    circle at var(--mouse-x) var(--mouse-y),
-    rgba(139, 92, 246, 0.15),
-    rgba(0, 0, 0, 0.3) 40%
-  );
-}
-
-.card-3d::before {
-  content: '';
-  position: absolute;
-  inset: 0;
-  background: radial-gradient(
-    circle at var(--mouse-x) var(--mouse-y),
-    rgba(180, 0, 255, 0.3),
-    rgba(255, 0, 60, 0.2),
-    transparent 40%
-  );
-  opacity: 0;
-  transition: opacity 0.3s ease;
-  pointer-events: none;
-  border-radius: inherit;
-}
-
-.card-3d:hover::before {
-  opacity: 1;
-}
-
 /* Floating Animation */
-.float {
-  animation: float 6s ease-in-out infinite;
-}
-
 @keyframes float {
-  0%, 100% {
-    transform: translateY(0);
+  0% {
+    transform: translateY(0) translateX(0);
+  }
+  25% {
+    transform: translateY(-10px) translateX(5px);
   }
   50% {
-    transform: translateY(-10px);
+    transform: translateY(0) translateX(10px);
   }
+  75% {
+    transform: translateY(10px) translateX(5px);
+  }
+  100% {
+    transform: translateY(0) translateX(0);
+  }
+}
+
+.animate-float {
+  animation: float 10s ease-in-out infinite;
+}
+
+/* Gradient Animation */
+@keyframes gradient {
+  0% {
+    background-position: 0% 50%;
+  }
+  50% {
+    background-position: 100% 50%;
+  }
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.animate-gradient {
+  background-size: 200% 200%;
+  animation: gradient 5s ease infinite;
 }
 
 /* Glow Effect */
@@ -581,4 +491,67 @@ body::before {
   background: linear-gradient(to bottom, var(--dragon-secondary), var(--dragon-accent));
   opacity: 0;
   transition: opacity 0.3s ease, transform 0.3s ease, filter 0.3s ease;
+}
+
+/* Rocket Flame Animation */
+/* @keyframes rocketFlame {
+  0% {
+    height: 16px;
+    opacity: 0.8;
+  }
+  50% {
+    height: 24px;
+    opacity: 1;
+  }
+  100% {
+    height: 16px;
+    opacity: 0.8;
+  }
+}
+
+.animate-rocket-flame {
+  animation: rocketFlame 0.5s ease-in-out infinite;
+  filter: blur(1px);
+} */
+
+/* Rocket Hover Effect */
+/* .rocket-hover {
+  transition: transform 0.3s ease;
+}
+
+.rocket-hover:hover {
+  transform: scale(1.1) rotate(5deg);
+} */
+
+/* Rocket Trail Effect */
+/* .rocket-trail {
+  position: absolute;
+  bottom: -20px;
+  left: 50%;
+  transform: translateX(-50%);
+  width: 4px;
+  height: 30px;
+  background: linear-gradient(to bottom, 
+    rgba(255, 0, 60, 0.8),
+    rgba(180, 0, 255, 0.5),
+    transparent
+  );
+  filter: blur(2px);
+  animation: rocketTrail 1s ease-out infinite;
+}
+
+@keyframes rocketTrail {
+  0% {
+    height: 30px;
+    opacity: 1;
+  }
+  100% {
+    height: 50px;
+    opacity: 0;
+  }
+} */
+
+/* Cursor pointer for clickable elements */
+.cursor-pointer {
+  cursor: pointer;
 } 
